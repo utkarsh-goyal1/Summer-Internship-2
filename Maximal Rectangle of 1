@@ -1,0 +1,79 @@
+import java.util.*;
+public class Main {
+    public static void main (String args[]) {
+        Scanner sc=new Scanner(System.in);
+        int rows=sc.nextInt();
+        int columns=sc.nextInt();
+        int [][]A=new int[rows][columns];
+        for(int i=0;i<A.length;i++)
+        {
+            for(int j=0;j<A[0].length;j++)
+            {
+                A[i][j]=sc.nextInt();
+            }
+        }
+        int ans=0;
+        int n=A.length;
+        int []res=new int[A[0].length];
+        res=A[n-1];
+        ans=LargestRectangle(res);
+        for(int i=n-2;i>=0;i--)
+        {
+            for(int j=0;j<A[0].length;j++)
+            {
+                if(A[i][j]==1)
+                {
+                    res[j]+=1;
+                }
+                else{
+                    res[j]=0;
+                }
+            }
+            ans=Math.max(LargestRectangle(res),ans);
+        }
+        System.out.println(ans);
+
+    }
+    public static int LargestRectangle(int []A)
+    {
+        int ans=0;
+        Stack<Integer>st=new Stack<>();
+        for(int i=0;i<A.length;i++)
+        {
+            while(!st.isEmpty() && A[i]<A[st.peek()])
+            {
+                int h=A[st.pop()];
+                int r=i;
+                if(st.isEmpty())
+                {
+                    int a=h*r;
+                    ans=Math.max(ans, a);
+                }
+                else
+                {
+                    int l=st.peek();
+                    int a=h*(r-l-1);
+                    ans=Math.max(ans, a);
+                }
+            }
+            st.push(i);
+        }
+        int r=A.length;
+        while(!st.isEmpty())
+        {
+            int h=A[st.pop()];
+            if(st.isEmpty())
+            {
+            int a=h*r;
+            ans=Math.max(ans, a);
+            }
+            else
+            {
+                int l=st.peek();
+                int a=h*(r-l-1);
+                ans=Math.max(ans, a);
+            }
+        }
+        return ans;
+    }
+}
