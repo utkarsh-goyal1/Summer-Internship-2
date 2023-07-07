@@ -1,0 +1,62 @@
+import java.util.*;
+
+public class Main {
+    public static void main (String args[]) {
+        Scanner sc=new Scanner (System.in);
+        int n=sc.nextInt();
+        int m=sc.nextInt();
+        LinkedList<Integer> l1=new LinkedList<Integer>();
+        LinkedList<Integer> l2=new LinkedList<Integer>();
+        for(int i=0;i<n;i++)
+        {
+            l1.add(sc.nextInt());
+        }
+        for(int j=0;j<m;j++)
+        {
+            l2.add(sc.nextInt());
+        }
+        int i=n-1;
+        int j=m-1;
+        ArrayList<Integer>list=new ArrayList<>();
+        int carry=0;
+        while(i>=0 && j>=0)
+        {
+            int a=l1.get(i);
+            int b=l2.get(j);
+            int sum=a+b+carry;
+            list.add(sum%10);
+            carry=sum/10;
+            i--;
+            j--;
+
+        }
+        // carry=0;
+        while(i>=0)
+        {
+            int a=l1.get(i);
+            int sum=a+carry;
+            list.add(sum%10);
+            carry=sum/10;
+            i--;
+
+        }
+        // carry=0;
+        while(j>=0)
+        {   
+            int b=l2.get(j);
+            int sum=b+carry;
+            list.add(sum%10);
+            carry=sum/10;
+            j--;
+        }
+        if(carry!=0)
+        {
+            list.add(carry);
+        }
+        Collections.reverse(list);
+        for(int k=0;k<list.size();k++)
+        {
+            System.out.print(list.get(k)+" ");
+        }
+    }
+}
