@@ -1,0 +1,30 @@
+import java.util.*;
+public class Main{
+	public static void main(String []args)
+	{
+		Scanner sc=new Scanner(System.in);
+		int n=sc.nextInt();
+		int []A=new int [n];
+		String s="";
+		for(int i=0;i<A.length;i++)
+		{
+			A[i]=sc.nextInt();
+		}
+		System.out.print(isPalindrome(A));
+	}
+	public static boolean isPalindrome(int []A) 
+    {
+        int i=0;
+		int j=A.length-1;
+		while(i<j)
+		{
+			if(A[i]!=A[j])
+			{
+				return false;
+			}
+			i++;
+			j--;
+		}
+		return true;
+    }
+}
