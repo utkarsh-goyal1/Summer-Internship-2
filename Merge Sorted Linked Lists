@@ -1,0 +1,59 @@
+import java.util.*;
+public class Main {
+    public static void main (String args[]) {
+		Scanner sc=new Scanner (System.in);
+		int t=sc.nextInt();
+		for(int i=0;i<t;i++)
+		{
+			int n1=sc.nextInt();
+			int []A=new int[n1];
+			for(int j=0;j<n1;j++)
+			{
+				A[j]=sc.nextInt();
+			}
+			int n2=sc.nextInt();
+			int []B=new int[n2];
+			for(int k=0;k<n2;k++)
+			{
+				B[k]=sc.nextInt();
+			}
+			int []res=merge(A,B);
+			for(int l=0;l<res.length;l++)
+			{
+				System.out.print(res[l]+" ");
+			}
+			System.out.println();
+		}
+    }
+	public static int[] merge(int []A,int []B)
+	{
+		int i=0;
+		int j=0;
+		int []res=new int[A.length+B.length];
+		int c=0;
+		while(i<A.length && j<B.length)
+		{
+			if(A[i]<B[j])
+			{
+				res[c++]=A[i];
+				i++;
+			}
+			else
+			{
+				res[c++]=B[j];
+				j++;
+			}
+		}
+		while(i<A.length)
+		{
+			res[c++]=A[i];
+			i++;
+		}
+		while(j<B.length)
+		{
+			res[c++]=B[j];
+			j++;
+		}
+		return res;
+	}
+}
