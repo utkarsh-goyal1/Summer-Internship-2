@@ -1,0 +1,77 @@
+import java.util.*;
+public class Main {
+    public static void main(String args[]) {
+        Scanner sc=new Scanner(System.in);
+		int n=sc.nextInt();
+		int q=sc.nextInt();
+		Stack<Integer>A_prev=new Stack<>();
+		for(int i=0;i<n;i++)
+		{
+			int ele=sc.nextInt();
+			A_prev.push(ele);
+		}
+		Stack<Integer>A_i=new Stack<>();
+		Stack<Integer>B_i=new Stack<>();
+		boolean []primes=new boolean[1000];
+		prime_sieve(primes);
+		for(int i=1;i<=q;i++)
+		{
+			int prime=getPrime(primes,i);
+			while(!A_prev.isEmpty())
+			{
+				int num=A_prev.pop();
+				if(num%prime==0)
+				{
+					B_i.push(num);
+				}
+				else
+				{
+					A_i.push(num);
+				}
+			}
+			while(!B_i.isEmpty())
+			{
+				System.out.println(B_i.pop());
+			}
+			A_prev=A_i;
+			A_i=new Stack<>();
+		}
+		while(!A_prev.isEmpty())
+		{
+			System.out.println(A_prev.pop());
+		}
+    }
+	public static int getPrime(boolean []primes,int n)
+	{
+		int i=0;
+		int c=0;
+		while(true)
+		{
+			if(primes[i]==false)
+			{
+				c++;
+			}
+			if(c==n)
+			{
+				break;
+			}
+			i++;
+		}
+		return i;
+	}
+	public static void prime_sieve(boolean []primes)
+	{
+		primes[0]=true;
+		primes[1]=true;
+		for(int i=2;i<primes.length;i++)
+		{
+			if(primes[i]==false)
+			{
+				for(int j=2;j*i<primes.length;j++)
+				{
+					primes[j*i]=true;
+				}
+			}
+		}
+	}
+}
