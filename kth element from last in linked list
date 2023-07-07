@@ -1,0 +1,21 @@
+import java.util.*;
+public class Main {
+    public static void main (String args[]) {
+        Scanner sc=new Scanner (System.in);
+        LinkedList<Integer>l2=new LinkedList<>();
+        boolean flag=true;
+        while(flag)
+        {
+            int n=sc.nextInt();
+            l2.add(n);
+            if(n==-1)
+            {
+                flag=false;
+            }
+        
+        }
+        int k=sc.nextInt();
+        int temp=l2.size()-1;
+        System.out.println(l2.get(temp-k));
+    }
+}
